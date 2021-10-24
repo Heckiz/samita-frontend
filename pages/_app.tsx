@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { AppProps } from "next/dist/shared/lib/router/router";
+import Layout from "../components/Layout/Layout";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
@@ -13,9 +13,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Flex justifyContent="center">
+          <Layout>
             <Component {...pageProps} />
-          </Flex>
+          </Layout>
         </Hydrate>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
