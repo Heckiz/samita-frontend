@@ -1,15 +1,37 @@
-import React from "react";
+import React, { FC, useState } from "react";
 import { Flex, Grid, Text } from "@chakra-ui/layout";
-const Navbar = () => {
+import { Button } from "@chakra-ui/button";
+
+const Navbar: FC<{ height: string }> = ({ height }) => {
+  const [menuActive, setMenuActive] = useState<boolean>(false);
+
   return (
-    <Flex h="100%" w="100%">
-      <Flex flex="0.7" justifyContent="center" alignItems="center">
+    <Flex
+      transition="all 1s"
+      position="relative"
+      flexDirection={{ base: "column", lg: "row" }}
+      height={menuActive ? "100vh" : height}
+      w="100%"
+      bg="blue.100"
+    >
+      <Flex
+        flex={{ base: menuActive ? "0.4" : "1", lg: "0.5" }}
+        justifyContent="center"
+        alignItems="center"
+      >
         LOGO
       </Flex>
-      <Grid 
-        p="2"
-        flex="1"
+
+      <Grid
         display="flex"
+        p="2"
+        w="100vw"
+        flexDirection={{ base: "column", lg: "row" }}
+        position={{ base: "absolute", lg: "initial" }}
+        bottom={{ base: "40%", lg: "0" }}
+        opacity={{ base: menuActive ? 1 : 0, lg: 1 }}
+        transition="all 1s"
+        flex="1"
         alignItems="center"
         justifyContent="center"
         templateColumns="repeat(4, 1fr)"
@@ -21,6 +43,17 @@ const Navbar = () => {
         <Text>Realizar Pedido</Text>
         <Text>Contacto</Text>
       </Grid>
+
+      <Button
+        display={{ base: "block", lg: "none" }}
+        bg="red.100"
+        position="absolute"
+        right="2vw"
+        top="2vh"
+        onClick={() => setMenuActive(!menuActive)}
+      >
+        <Text>Menu</Text>
+      </Button>
     </Flex>
   );
 };
