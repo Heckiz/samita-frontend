@@ -5,6 +5,7 @@ import { dehydrate, QueryClient } from "react-query";
 import WorkCard from "../../components/WorkCard/WorkCard";
 import { fetchWorks, useWorks } from "../../hooks/useWorks";
 import { RootObject } from "../../interfaces/works.interface";
+import Link from "next/link";
 
 const WorksList: FC = () => {
   const { data, isLoading, isError } = useWorks();
@@ -27,7 +28,9 @@ const WorksList: FC = () => {
       mx="4vw"
     >
       {data?.map((item: RootObject) => (
-        <WorkCard item={item} key={item.id} />
+        <Link href={`/works/${item.id}`} key={item.id} passHref>
+          <WorkCard item={item} key={item.id} />
+        </Link>
       ))}
     </Grid>
   );

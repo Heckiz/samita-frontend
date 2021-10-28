@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { Flex, Grid, Text } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
+import Link from "next/link";
 
 const Navbar: FC<{ height: string }> = ({ height }) => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
@@ -38,10 +39,18 @@ const Navbar: FC<{ height: string }> = ({ height }) => {
         gap={6}
         bg="blue.100"
       >
-        <Text>Sobre Nosotros</Text>
-        <Text>Trabajos Realizados</Text>
-        <Text>Realizar Pedido</Text>
-        <Text>Contacto</Text>
+        <Link href="/" passHref>
+          <Text>Inicio</Text>
+        </Link>
+        <Link href="/about" passHref>
+          <Text>Sobre Nosotros</Text>
+        </Link>
+        <Link href="/works" passHref>
+          <Text>Trabajos Realizados</Text>
+        </Link>
+        <Link href="/contact" passHref>
+          <Text>Contacto</Text>
+        </Link>
       </Grid>
 
       <Button
